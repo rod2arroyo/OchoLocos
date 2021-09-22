@@ -3,7 +3,11 @@ package com.example.ocholocoprueba
 import android.media.Image
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Layout
+import android.view.View
 import android.widget.Button
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import kotlin.random.Random
 
@@ -14,6 +18,9 @@ class MainActivity : AppCompatActivity() {
         val btnRobar = findViewById<Button>(R.id.robarCartas)
         val btnPasar = findViewById<Button>(R.id.terminarTurno)
         val btnImprimir = findViewById<Button>(R.id.imprimirCartas)
+        val customLayout = findViewById<CartasJugador>(R.id.cartasTotales)
+
+        var listImagen = ArrayList<ImageView>()
 
         btnRobar.setOnClickListener {
             Toast.makeText(this,cmesaA?.number,Toast.LENGTH_SHORT).show()
@@ -26,6 +33,11 @@ class MainActivity : AppCompatActivity() {
             imprimir()
         }
 
+        val texto = TextView(this)
+        texto.text = "HOLA AAAA"
+        customLayout.addView(texto)
+
+        val imagen = ImageView(this)
 
         crearCartas()
         repartir()

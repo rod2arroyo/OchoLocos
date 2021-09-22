@@ -28,4 +28,6 @@ class ViewCartas @JvmOverloads constructor(
 
         setMeasuredDimension(width,height)
     }
+
+
 }
