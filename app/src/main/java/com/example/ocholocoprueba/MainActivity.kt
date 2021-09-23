@@ -22,15 +22,15 @@ class MainActivity : AppCompatActivity() {
         val customLayout = findViewById<CartasJugador>(R.id.cartasTotales)
         val cartaMesa = findViewById<ImageView>(R.id.cartaMesa)
         val cartaJugada = findViewById<ImageView>(R.id.cartaJugada)
+        val turnoActual = findViewById<TextView>(R.id.turnoActual)
+        turnoActual.text = "1"
 
-        var params = LayoutParams(
-            LayoutParams.WRAP_CONTENT,
-            LayoutParams.WRAP_CONTENT
-        )
+        var params = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
         params.setMargins(10,10,10,10)
         params.weight = 1F
 
         btnPasar.setOnClickListener{
+            //turnoActual.text = "$turno"
             siguienteturno(customLayout)
         }
 
@@ -200,7 +200,7 @@ fun imprimir(){
     for(i in 0..2){
         println("JUGADOR NUMERO $i ")
         for(j in 0 until (listjugadores[i].mano.size)){
-            println(listjugadores[i].mano[j].number + " " + listjugadores[i].mano[j].palo+ " " + listjugadores[i].mano[j].id)
+            print(listjugadores[i].mano[j].number + " " + listjugadores[i].mano[j].palo+ " " + listjugadores[i].mano[j].id + "/ ")
         }
         println("")
     }
