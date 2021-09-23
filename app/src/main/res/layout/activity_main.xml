@@ -29,6 +29,30 @@
         android:layout_marginRight="311dp"
         android:text="Imprimir" />
 
+    <Button
+        android:id="@+id/terminarTurno"
+        android:layout_width="112dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="19dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_toStartOf="@+id/imprimirCartas"
+        android:layout_toLeftOf="@+id/imprimirCartas"
+        android:text="Pasar turno" />
+
+    <TextView
+        android:id="@+id/turnoActual"
+        android:layout_width="85dp"
+        android:layout_height="86dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="49dp"
+        android:layout_marginRight="49dp"
+        android:layout_toStartOf="@+id/terminarTurno"
+        android:layout_toLeftOf="@+id/terminarTurno"
+        android:text="" />
+
     <ImageView
         android:id="@+id/cartaMesa"
         android:layout_width="52dp"
