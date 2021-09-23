@@ -1,45 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
-    <com.example.ocholocoprueba.ViewCartas
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:scaleType="centerCrop"
-        app:srcCompat="@android:drawable/btn_star_big_on" />
+    tools:context=".MainActivity"
+    android:orientation="horizontal">
 
     <com.example.ocholocoprueba.CartasJugador
         android:id="@+id/cartasTotales"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"/>
-
-
+        android:layout_width="match_parent"
+        android:layout_height="185dp"
+        android:layout_below="@+id/imprimirCartas"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="147dp"
+        android:layout_marginBottom="11dp"
+        android:layout_weight="1" />
 
     <Button
         android:id="@+id/imprimirCartas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="311dp"
+        android:layout_marginRight="311dp"
         android:text="Imprimir" />
 
-    <Button
-        android:id="@+id/robarCartas"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Robar" />
+    <ImageView
+        android:id="@+id/cartaMesa"
+        android:layout_width="52dp"
+        android:layout_height="67dp"
+        android:layout_below="@+id/imprimirCartas"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="43dp"
+        android:layout_marginEnd="267dp"
+        android:layout_marginRight="267dp" />
 
-    <Button
-        android:id="@+id/terminarTurno"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Terminar Turno" />
+    <ImageView
+        android:id="@+id/cartaJugada"
+        android:layout_width="56dp"
+        android:layout_height="72dp"
+        android:layout_below="@+id/imprimirCartas"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="427dp"
+        android:layout_marginRight="427dp"
+        android:src="@drawable/joker1" />
 
 
-</LinearLayout>
+</RelativeLayout>
