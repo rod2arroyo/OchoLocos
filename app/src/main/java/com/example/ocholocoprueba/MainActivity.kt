@@ -15,28 +15,20 @@ import android.app.Activity
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_main)
-        //val btnRobar = findViewById<Button>(R.id.robarCartas)
         val btnPasar = findViewById<Button>(R.id.terminarTurno)
         val btnImprimir = findViewById<Button>(R.id.imprimirCartas)
         val customLayout = findViewById<CartasJugador>(R.id.cartasTotales)
         val cartaMesa = findViewById<ImageView>(R.id.cartaMesa)
         val cartaJugada = findViewById<ImageView>(R.id.cartaJugada)
         val turnoActual = findViewById<TextView>(R.id.turnoActual)
-        turnoActual.text = "1"
 
         var params = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
         params.setMargins(10,10,10,10)
         params.weight = 1F
 
         btnPasar.setOnClickListener{
-            //turnoActual.text = "$turno"
             var cartactual : Carta = list[1]
-
-           // println("cartaactual:--->>" + cartactual.number )
-            //println("cjugaa:--->>" + cjugada )
-
             for(i in 0..51){
                 if(list[i].id== cjugada){
                     cartactual=list[i]
@@ -45,51 +37,34 @@ class MainActivity : AppCompatActivity() {
             }
             var turnoantiguo = turno
 
-
             Toast.makeText(this,("Jugador  " + listjugadores[(turnoantiguo-1)].orden + " acaba de jugar" ),Toast.LENGTH_LONG).show()
-            jugadaop(turno-1,cartactual,cmesaA,customLayout,listjugadores[(turno-1)],params,this,cartaMesa,cartaJugada)
-           //siguienteturno(customLayout,listjugadores[(turno-1)],params,this,cartaMesa,cartaJugada)
+            jugadaop(turno-1,cartactual,cmesaA,customLayout,listjugadores[(turno-1)],params,this,cartaMesa,cartaJugada,turnoActual)
+            //siguienteturno(customLayout,listjugadores[(turno-1)],params,this,cartaMesa,cartaJugada)
             println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxjugador1: "+ listjugadores[0].mano.size+"jugador2: "+ listjugadores[1].mano.size+"jugador2: "+ listjugadores[2].mano.size)
 
             if (listjugadores[(turnoantiguo-1)].mano.size==1)
             {
                 Toast.makeText(this,("Jugador " + listjugadores[(turnoantiguo-1)].orden + " va por una"),Toast.LENGTH_LONG).show()
             }
+
+            if (listjugadores[(turnoantiguo-1)].mano.size==0)
+            {
+                Toast.makeText(this,("JUGADOR " + listjugadores[(turnoantiguo-1)].orden + " HA GANADO !!"),Toast.LENGTH_LONG).show()
+            }
         }
 
         btnImprimir.setOnClickListener{
-            //imprimirCartas(listjugadores[(turno-1)],params,customLayout,this)
-            pasarturno(customLayout,listjugadores[(turno-1)],params,this,cartaMesa,cartaJugada)
+            pasarturno(customLayout,listjugadores[(turno-1)],params,this,cartaMesa,cartaJugada,turnoActual)
 
         }
-
-
-
         crearCartas()
         repartir()
         imprimir()
         imprimirmaso()
-        //jugada(0,jugador1.mano[3],cmesaA)
         cartaMesa.setImageResource(cards[cmesaA!!.id])
 
         imprimirCartas(jugador1,params,customLayout,this)
         darFuncionalidad(cartaJugada,this)
-
-        /*for(i in 0..(jugador1.mano.size-1)){
-            var imagenA = ImageView(this)
-            imagenA.setImageResource(cards[jugador1.mano[i].id])
-            imagenA.id = jugador1.mano[i].id
-            listaXJugar.add(imagenA)
-            imagenA.layoutParams = params
-            customLayout.addView(imagenA)
-        }*/
-        /*for(i in 0..(listaXJugar.size-1)){
-            listaXJugar[i].setOnClickListener{
-                cartaJugada.setImageResource(cards[listaXJugar[i].id])
-                //Toast.makeText(this," " + list[listaXJugar[i].id].number + " " +list[listaXJugar[i].id].palo ,Toast.LENGTH_SHORT).show()
-            }
-        }*/
-
     }
 
 }
@@ -140,28 +115,24 @@ fun imprimirCartas(jugador: Jugador,params:LayoutParams,customLayout:CartasJugad
     }
 }
 // Cambia de turno al siguiente Jugador y limpia toda la custom view
-fun siguienteturno(customLayout:CartasJugador,jugador: Jugador,params:LayoutParams,activity : Activity,cartaMesa : ImageView, cartaJugada: ImageView){
+fun siguienteturno(customLayout:CartasJugador,jugador: Jugador,params:LayoutParams,activity : Activity,cartaMesa : ImageView, cartaJugada: ImageView,turnoActual:TextView){
 
-    //Toast.makeText(this,"Error de login",Toast.LENGTH_LONG).show()
     if(jugador.mano.size==1){
        // Toast.makeText(this,"Error de login",Toast.LENGTH_LONG).show()
 
     }
-        //println("sizeeeeee.....  " +jugador.mano.size )
-
     customLayout.removeAllViews();
 
     turno+=1
     if(turno==4){
         turno=1
     }
+
+    turnoActual.text = "Turno del Jugador: $turno"
+
     println("sigue----------xxxxxxxxxxxx===tunro----------------------------xxxxxxxxxxxxxxxx    " + turno)
-//    println("sigue----------xxxxxxxxxxxx===cjugada  " + cjugada)
-//    println("sigue----------xxxxxxxxxxxx===iddd  " + cards[cmesaA!!.id])
-    //cartaMesa.setImageResource(15)
     imprimirCartas(listjugadores[(turno-1)],params,customLayout,activity)
     cartaJugada.setImageResource(R.drawable.joker1)
-   // cartaMesa.setImageResource(cards[cjugada])
     cartaMesa.setImageResource(cards[cmesaA!!.id])
     darFuncionalidad(cartaJugada,activity)
 }
@@ -173,11 +144,7 @@ fun darFuncionalidad(cartaJugada: ImageView, activity:Activity){
             cartaJugada.setImageResource(cards[listaXJugar[i].id])
             println("cjugada antesss:------>>" + cjugada )
             cjugada=listaXJugar[i].id
-            //println("cjugada cambiaaaa:------>>" + cjugada )
-            //println("cjugada cambiaaaa:------>>" + cards[listaXJugar[i].id] )
-            //println("cjugada cambiaaaa:------>>" + listaXJugar[i].id )
             println("mesaaaaaa--->>>>>-->>>"+cmesaA?.palo + "  " + cmesaA?.number)
-            //Toast.makeText(activity," " + list[listaXJugar[i].id].number + " " +list[listaXJugar[i].id].palo ,Toast.LENGTH_SHORT).show()
             Int
         }
     }
@@ -192,7 +159,6 @@ fun crearCartas(){
         for(j in 0..12){
             var carta = Carta(numeros[j],palos[i],1,0)
             list.add(carta)
-            //println(numeros[j] + " carta" + palos[i])
         }
     }
 
@@ -222,9 +188,9 @@ fun agarrarCarta(jugador : Jugador, n :Int ){
     }
 }
 //pasar de turno
-fun pasarturno(customLayout:CartasJugador,jugador: Jugador,params:LayoutParams,activity : Activity,cartaMesa : ImageView, cartaJugada: ImageView){
+fun pasarturno(customLayout:CartasJugador,jugador: Jugador,params:LayoutParams,activity : Activity,cartaMesa : ImageView, cartaJugada: ImageView,turnoActual: TextView){
     agarrarCarta(jugador,1)
-    siguienteturno(customLayout,listjugadores[(turno-1)],params,activity,cartaMesa,cartaJugada)
+    siguienteturno(customLayout,listjugadores[(turno-1)],params,activity,cartaMesa,cartaJugada,turnoActual)
 }
 // Procede a realizar la jugada
 fun jugada(orden : Int ,carta :Carta,cmesa : Carta? ){
@@ -280,7 +246,7 @@ fun imprimirmaso(){
 
 }
 //logica op jugada
-fun jugadaop(orden : Int, carta : Carta, cmesa : Carta? ,customLayout:CartasJugador,jugador: Jugador,params:LayoutParams,activity : Activity,cartaMesa : ImageView, cartaJugada: ImageView){
+fun jugadaop(orden : Int, carta : Carta, cmesa : Carta? ,customLayout:CartasJugador,jugador: Jugador,params:LayoutParams,activity : Activity,cartaMesa : ImageView, cartaJugada: ImageView,turnoActual: TextView){
    // println("ordenn iniciall +++++++++++++>>>>" + orden)
 
     println("carta---------------------------------------------------------------->>>"+carta.number  + "--- " + carta.palo)
@@ -411,7 +377,7 @@ fun jugadaop(orden : Int, carta : Carta, cmesa : Carta? ,customLayout:CartasJuga
         if (cant==1){
             cmesaA=listjugadores[orden].mano[posi]
             listjugadores[orden].mano.remove(listjugadores[orden].mano[posi])
-            siguienteturno(customLayout,listjugadores[(turno-1)],params,activity,cartaMesa,cartaJugada)
+            siguienteturno(customLayout,listjugadores[(turno-1)],params,activity,cartaMesa,cartaJugada,turnoActual)
 
         }else{
             cmesaA=listjugadores[orden].mano[posi]
@@ -453,9 +419,9 @@ fun jugadaop(orden : Int, carta : Carta, cmesa : Carta? ,customLayout:CartasJuga
                 cmesaA=listjugadores[orden].mano[posi]
                 listjugadores[orden].mano.remove(listjugadores[orden].mano[posi])
                 //println("entrare  en sigueinte turno este ////")
-                siguienteturno(customLayout,listjugadores[(turno-1)],params,activity,cartaMesa,cartaJugada)
+                siguienteturno(customLayout,listjugadores[(turno-1)],params,activity,cartaMesa,cartaJugada,turnoActual)
                 if (cmesaA!!.number=="J"){
-                    siguienteturno(customLayout,listjugadores[(turno-1)],params,activity,cartaMesa,cartaJugada)
+                    siguienteturno(customLayout,listjugadores[(turno-1)],params,activity,cartaMesa,cartaJugada,turnoActual)
                 }
             }else{
                 cmesaA=listjugadores[orden].mano[posi]
