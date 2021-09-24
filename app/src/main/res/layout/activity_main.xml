@@ -24,22 +24,22 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="311dp"
-        android:layout_marginRight="311dp"
-        android:text="Imprimir" />
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="159dp"
+        android:layout_marginRight="159dp"
+        android:text="Robar y pasar turno" />
 
     <Button
         android:id="@+id/terminarTurno"
         android:layout_width="112dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="19dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginTop="21dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginRight="40dp"
         android:layout_toStartOf="@+id/imprimirCartas"
         android:layout_toLeftOf="@+id/imprimirCartas"
-        android:text="Pasar turno" />
+        android:text="Jugar" />
 
     <TextView
         android:id="@+id/turnoActual"
