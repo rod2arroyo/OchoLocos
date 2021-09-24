@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
             var turnoantiguo = turno
 
 
-            Toast.makeText(this,("Jugador  " + listjugadores[(turnoantiguo-1)].orden + "acaba de jugar" ),Toast.LENGTH_LONG).show()
+            Toast.makeText(this,("Jugador  " + listjugadores[(turnoantiguo-1)].orden + " acaba de jugar" ),Toast.LENGTH_LONG).show()
             jugadaop(turno-1,cartactual,cmesaA,customLayout,listjugadores[(turno-1)],params,this,cartaMesa,cartaJugada)
            //siguienteturno(customLayout,listjugadores[(turno-1)],params,this,cartaMesa,cartaJugada)
             println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxjugador1: "+ listjugadores[0].mano.size+"jugador2: "+ listjugadores[1].mano.size+"jugador2: "+ listjugadores[2].mano.size)
